@@ -1,3 +1,4 @@
+import string
 from utils import join_list
 
 
@@ -37,7 +38,39 @@ class FileWithContentDto:
     }
 
 
+class FileCountOptionsDto:
+  id: string
+  byte: bool
+  chars: bool
+  words: bool
+  lines: bool
+
+
+class FileCountResultDto:
+  id: string
+  byteCount: int
+  charsCount: int
+  wordsCount: int
+  linesCount: int
+
+
 def extract_file_id_name(file: str, separator: str) -> list[str]:
   id = file.split(separator)[0]
   name = join_list(file.split(separator)[1:], separator)
   return [id, name]
+
+
+def count_bytes(binary_content: bytes) -> int:
+  return len(binary_content)
+
+
+def count_words(content: str) -> int:
+  return len(content.split())
+
+
+def count_characters(content: str) -> int:
+  return len(content)
+
+
+def count_lines(content: str) -> int:
+  return len(content.splitlines())

@@ -1,7 +1,6 @@
 import os
 from django.http import JsonResponse
 
-from utils import join_list
 from wctool.wctoolutils import FileDto, FileWithContentDto, extract_file_id_name
 
 
@@ -42,7 +41,7 @@ def get_files_by_id(request) -> JsonResponse:
   with open(DIRECTORY_NAME + filePath, 'r', encoding='utf-8') as file:
     content = file.read()
     [id, name] = extract_file_id_name(filePath, FILE_SEPARATOR)
-    print('len(content)', len(content))
+
     if (len(content) <= 2 * CHAR_NUMBER):
       startContent: str = content
       endContent: str = ''

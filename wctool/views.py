@@ -1,7 +1,7 @@
 import os
 from django.http import JsonResponse
 
-from wctool.wctoolutils import FileDto, FileWithContentDto, extract_file_id_name
+from wctool.wctoolutils import FileDto, FileWithContentDto, count_bytes, count_characters, count_lines, count_words, extract_file_id_name
 
 
 DIRECTORY_NAME = "./wctool/texts/"
@@ -62,3 +62,29 @@ def get_files_by_id(request) -> JsonResponse:
       startContent,
       endContent,
     ).to_dict())
+
+
+def get_files_properties_by_id(request) -> JsonResponse:
+  if request.method != "GET":
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+  options: dict = request.GET.dict()
+  fileId: str = options.get('id')
+  for filePath in os.listdir(DIRECTORY_NAME):
+    if filePath.startswith(fileId):
+      with open(DIRECTORY_NAME + filePath, 'r', encoding='utf-8') as file:
+        content = file.read()
+      with open(DIRECTORY_NAME + filePath, 'rb') as file:
+        binary_content = file.read()
+
+  response: dict = {}
+  if (int(options.get('byte'))):
+    response['byte'] = count_bytes(binary_content)
+  if (int(options.get('chars'))):
+    response['chars'] = count_words(content)
+  if (int(options.get('words'))):
+    response['words'] = count_characters(content)
+  if (int(options.get('lines'))):
+    response['lines'] = count_lines(content)
+
+  return JsonResponse(response)

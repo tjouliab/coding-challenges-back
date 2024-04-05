@@ -4,4 +4,6 @@ from . import views
 urlpatterns = [
   path("all-files-names", views.get_all_files_names, name="get_all_files_names"),
   path("file-by-id", views.get_files_by_id, name="get_all_files_names"),
+  path("file-properties-by-id", views.get_files_properties_by_id,
+       name="get_files_properties_by_id"),
 ]

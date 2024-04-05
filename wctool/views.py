@@ -77,14 +77,14 @@ def get_files_properties_by_id(request) -> JsonResponse:
       with open(DIRECTORY_NAME + filePath, 'rb') as file:
         binary_content = file.read()
 
-  response: dict = {}
+  response: dict = {'id': fileId}
   if (int(options.get('byte'))):
-    response['byte'] = count_bytes(binary_content)
+    response['byteCount'] = count_bytes(binary_content)
   if (int(options.get('chars'))):
-    response['chars'] = count_words(content)
+    response['charsCount'] = count_words(content)
   if (int(options.get('words'))):
-    response['words'] = count_characters(content)
+    response['wordsCount'] = count_characters(content)
   if (int(options.get('lines'))):
-    response['lines'] = count_lines(content)
+    response['linesCount'] = count_lines(content)
 
   return JsonResponse(response)

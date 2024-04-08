@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class WctoolConfig(AppConfig):
-  default_auto_field = "django.db.models.BigAutoField"
-  name = "wctool"
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "wctool"

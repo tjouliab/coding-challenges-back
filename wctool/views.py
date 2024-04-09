@@ -61,7 +61,7 @@ def get_files_by_id(request) -> JsonResponse:
         name,
         startContent,
         endContent,
-      ).to_dict())
+    ).to_dict())
 
 
 def get_files_properties_by_id(request) -> JsonResponse:

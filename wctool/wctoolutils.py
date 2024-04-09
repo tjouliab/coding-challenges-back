@@ -1,5 +1,4 @@
 import string
-from utils import join_list
 
 
 class FileDto:
@@ -12,8 +11,8 @@ class FileDto:
 
     def to_dict(self) -> dict:
         return {
-          'id': self.id,
-          'name': self.name,
+            'id': self.id,
+            'name': self.name,
         }
 
 
@@ -31,10 +30,10 @@ class FileWithContentDto:
 
     def to_dict(self) -> dict:
         return {
-          'id': self.id,
-          'name': self.name,
-          'startContent': self.startContent,
-          'endContent': self.endContent,
+            'id': self.id,
+            'name': self.name,
+            'startContent': self.startContent,
+            'endContent': self.endContent,
         }
 
 
@@ -56,7 +55,7 @@ class FileCountResultDto:
 
 def extract_file_id_name(file: str, separator: str) -> list[str]:
     id = file.split(separator)[0]
-    name = join_list(file.split(separator)[1:], separator)
+    name = separator.join(file.split(separator)[1:])
     return [id, name]
 
 
